@@ -107,6 +107,7 @@ def get_following_status(browser, person, logger):
                 .format(person.encode('utf-8')))
         raise Exception
 
+        
     return following, follow_button
 
 def unfollow(browser,
@@ -286,6 +287,9 @@ def unfollow(browser,
                                 '--> Unfollow error with {},'
                                 ' maybe no longer exists...'
                                     .format(person.encode('utf-8')))
+                            
+                            logger.error("HAIMB - deleting...")
+                            delete_line_from_file('{0}{1}_followedPool.csv'.format(logfolder, username), person, logger)
                             continue
                         pass
 
